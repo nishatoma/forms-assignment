@@ -13,6 +13,63 @@
            Upon submitting the form, you should simply print the Value of the Form to the Console.
            Optionally, display it in your template.
       -->
+      <form #myForm="ngForm" (ngSubmit)="submitForm()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            class="form-control" 
+            type="email" 
+            name="email" 
+            ngModel 
+            required
+            email
+            #mail="ngModel">
+            <span class="help-block" *ngIf="!mail.valid && mail.touched">
+              Please enter your email
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password"
+            name="passowrd"
+            placeholder="Password"
+            class="form-control"
+            ngModel
+            #pass="ngModel"
+            required>
+            <span class="help-block" *ngIf="!pass.valid && pass.touched">
+              Please enter your password
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="subscriptions">Subscriptions</label>
+            <select 
+              type="dropdown"
+              name="subscriptions"
+              placeholder="Password"
+              class="form-control"
+              [ngModel]="defaultSubscription"
+              required>
+              <option value="basic">Basic</option>
+              <option value="advanced">advanced</option>
+              <option value="pro">pro</option>
+            </select>
+          </div>
+          <button 
+            class="btn btn-success"
+            type="submit"
+            [disabled]="!form.valid">
+            Submit
+          </button>
+      </form>
+    </div>
+  </div>
+  <div class="row pull-center" *ngIf="submitted">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <h4>Email: {{ user.email }}</h4>
+      <h4>Password: {{ user.password }}</h4>
+      <h4>Option Selected: {{ user.option }}</h4>
     </div>
   </div>
 </div>
